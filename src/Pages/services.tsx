@@ -2,15 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../Components/footer";
 import Navbar from "../Components/navbar";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  details: string;
-  image: string;
-  category: "uiux" | "graphic" | "presentation";
-}
+import ProjectModal from "../Components/ProjectModal";
+import { projects as allProjects, Project } from "../data/projects";
 
 const Services: React.FC = () => {
   const location = useLocation();
@@ -22,48 +15,22 @@ const Services: React.FC = () => {
   useEffect(() => {
     if (location.state?.activeTab) {
       setActiveTab(location.state.activeTab);
+      return;
     }
-  }, [location.state]);
 
-  // Sample projects data - replace with your actual data
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "EcoCart Mobile App",
-      description:
-        "Sustainable shopping app designed to reduce carbon footprint through intuitive flows and eco-first visuals.",
-      details: "15 screens · Interactive prototype · Design system",
-      image: "/project1.png", // Replace with actual image path
-      category: "uiux",
-    },
-    {
-      id: 2,
-      title: "EcoCart Mobile App",
-      description:
-        "Sustainable shopping app designed to reduce carbon footprint through intuitive flows and eco-first visuals.",
-      details: "15 screens · Interactive prototype · Design system",
-      image: "/project2.png",
-      category: "graphic",
-    },
-    {
-      id: 3,
-      title: "EcoCart Mobile App",
-      description:
-        "Sustainable shopping app designed to reduce carbon footprint through intuitive flows and eco-first visuals.",
-      details: "15 screens · Interactive prototype · Design system",
-      image: "/project3.png",
-      category: "uiux",
-    },
-    {
-      id: 4,
-      title: "EcoCart Mobile App",
-      description:
-        "Sustainable shopping app designed to reduce carbon footprint through intuitive flows and eco-first visuals.",
-      details: "15 screens · Interactive prototype · Design system",
-      image: "/project4.png",
-      category: "presentation",
-    },
-  ];
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get("tab");
+    if (
+      tabParam === "uiux" ||
+      tabParam === "graphic" ||
+      tabParam === "presentation"
+    ) {
+      setActiveTab(tabParam);
+    }
+  }, [location.state, location.search]);
+
+  // Use shared projects data
+  const projects: Project[] = allProjects;
 
   const filteredProjects = projects.filter(
     (project) => project.category === activeTab,
@@ -81,18 +48,18 @@ const Services: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white mt-24">
       {/* Navigation */}
       <div className="bg-white">
         <Navbar />
       </div>
 
       {/* Tabs Section */}
-      <section className="container mx-auto px-8 py-8">
+      <section className="w-full  px-8 py-2">
         <div className="flex gap-4 flex-wrap">
           <button
             onClick={() => setActiveTab("uiux")}
-            className={`px-8 py-4 rounded-full font-medium transition-colors ${
+            className={`px-6 py-2 rounded-full font-medium transition-colors ${
               activeTab === "uiux"
                 ? "bg-black text-white"
                 : "bg-white text-black border-2 border-black hover:bg-gray-100"
@@ -102,17 +69,17 @@ const Services: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveTab("graphic")}
-            className={`px-8 py-4 rounded-full font-medium transition-colors ${
+            className={`px-6 py-2 rounded-full font-medium transition-colors ${
               activeTab === "graphic"
                 ? "bg-black text-white"
                 : "bg-white text-black border-2 border-black hover:bg-gray-100"
             }`}
           >
-            Graphic Design Work
+            Graphic Design
           </button>
           <button
             onClick={() => setActiveTab("presentation")}
-            className={`px-8 py-4 rounded-full font-medium transition-colors ${
+            className={`px-6 py-2 rounded-full font-medium transition-colors ${
               activeTab === "presentation"
                 ? "bg-black text-white"
                 : "bg-white text-black border-2 border-black hover:bg-gray-100"
@@ -124,39 +91,40 @@ const Services: React.FC = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="container mx-auto px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section className="w-full  px-8 pt-6 pb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <div key={project.id} className="group cursor-pointer">
               {/* Project Image */}
               <div
-                className="relative overflow-hidden rounded-3xl bg-gray-100 mb-6 aspect-[4/3] cursor-pointer"
+                className="relative overflow-hidden rounded-3xl bg-gray-100 mb-2 aspect-[4/3] cursor-pointer"
                 onClick={() => openModal(project)}
               >
-                {/* Replace this with actual image */}
-                {/* <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                /> */}
-
-                {/* Placeholder - remove when adding images */}
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white text-2xl font-bold">
-                  {project.title}
-                </div>
+                />
               </div>
 
               {/* Project Info */}
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
+              <div className=" gap-4">
+                <div className="mb-4">
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-gray-600 mb-3">{project.description}</p>
                   <p className="text-sm text-gray-500">{project.details}</p>
                 </div>
 
                 {/* View Case Study Button */}
-                <button className="flex items-center gap-2 px-6 py-3 border-2 border-black rounded-full hover:bg-black hover:text-white transition-colors whitespace-nowrap">
-                  View Case Study
+                <button
+                  onClick={() => openModal(project)}
+                  className="flex items-center gap-2 px-4 py-2 border-2 border-black rounded-full hover:bg-black hover:text-white transition-colors whitespace-nowrap"
+                >
+                  {project.category === "uiux"
+                    ? "View Case Study"
+                    : project.category === "graphic"
+                      ? "View Work"
+                      : "View Slides"}
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -188,37 +156,7 @@ const Services: React.FC = () => {
 
       {/* Project Modal */}
       {modalProject && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
-          onClick={closeModal}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-3xl w-full mx-4 p-8"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-start gap-4">
-              <div>
-                <h2 className="text-3xl font-bold mb-2">
-                  {modalProject.title}
-                </h2>
-                <p className="text-gray-600 mb-4">{modalProject.description}</p>
-                <p className="text-sm text-gray-500">{modalProject.details}</p>
-              </div>
-              <button
-                onClick={closeModal}
-                className="ml-auto rounded-full border-2 border-black px-4 py-2 hover:bg-black hover:text-white"
-              >
-                Close
-              </button>
-            </div>
-
-            <div className="mt-6 aspect-[16/9] rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
-              <div className="text-xl font-semibold text-gray-700">
-                {modalProject.title} Preview
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProjectModal project={modalProject} onClose={closeModal} />
       )}
 
       {/* Footer */}

@@ -1,47 +1,68 @@
-import React from "react";
+import { motion, Variants } from "framer-motion";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ContactModal from "./ContactModal";
+
+const footerFadeUp: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
 
 const Footer: React.FC = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   return (
-    <footer className="relative bg-[#2a2a2a] text-white overflow-hidden">
-      <div className="container mx-auto px-8 ">
-        {/* Mobile: artwork at top */}
-        <div className="lg:hidden block w-full pt-6">
-          <img
-            src="/assets/footer_img_mobile.svg"
-            alt="Footer graphic mobile"
-            className="w-full h-auto"
-            loading="lazy"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10 py-16">
+    <footer
+      id="footer"
+      className="relative bg-[#292929] text-white overflow-hidden pb-6"
+      style={{
+        backgroundImage: "url('/assets/hero_bg.png')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="">
+        <motion.div
+          variants={footerFadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-120px 0px" }}
+          className=" w-full "
+        >
           {/* Left Column */}
-          <div className="space-y-8">
-            {/* Header */}
-            <h2 className="hidden lg:block text-6xl font-bold leading-tight">
-              Let's Work Together
-            </h2>
+          <div className="space-y-2 justify-items-center md:justify-start w-full ">
             {/* Mobile heading image */}
-            <img
-              src="/assets/Let’s Work Together.svg"
-              alt="Let's Work Together"
-              className="lg:hidden block w-full h-auto"
-              loading="lazy"
-            />
+            <div className=" w-full flex ">
+              <img
+                src="/assets/Let’s Work Together.svg"
+                alt="Let's Work Together"
+                className=" w-full h-auto "
+                loading="lazy"
+              />
+            </div>
 
             {/* Logo and Description */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
+            <div className="space-y-4 w-full justify-center  pt-8 pb-6 px-12 ">
+              <div className="w-full flex justify-center ">
                 <img
-                  src="/assets/pixlogo.png"
+                  src="/assets/pixlogo_white.svg"
                   alt="PixelPlay logo"
-                  className="h-8 w-auto object-contain"
+                  className="h-6 w-auto"
                   loading="lazy"
                 />
-                <span className="text-2xl font-bold">PixelPlay</span>
               </div>
 
-              <p className="text-gray-300 max-w-xl">
+              <p className="text-gray-300 w-full text-center ">
                 Have an idea, a product, or a brand that deserves better design?
                 <br />
                 PixelPlay is here to help you turn concepts into clear,
@@ -50,7 +71,7 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="flex flex-wrap items-center gap-6">
+            <div className="flex w-full flex-wrap justify-center  gap-6 pb-6 md:px-12">
               <a
                 href="https://wa.me/941234567890"
                 target="_blank"
@@ -113,8 +134,11 @@ const Footer: React.FC = () => {
             </div>
 
             {/* CTA Button */}
-            <div>
-              <button className="flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-black transition-colors">
+            <div className="pb-6 w-full flex justify-center  px-12">
+              <button 
+                onClick={() => setIsContactModalOpen(true)}
+                className="flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-black transition-colors"
+              >
                 Start a Conversation
                 <svg
                   className="w-5 h-5"
@@ -133,8 +157,8 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Footer Links */}
-            <div className="pt-8 border-t border-gray-600">
-              <div className="flex flex-wrap gap-6 mb-4">
+            <div className="pt-8 border-t w-full border-gray-600 px-12">
+              <div className="flex flex-wrap gap-6 mb-4 w-full justify-center ">
                 <Link to="/" className="hover:text-[#c8ff00] transition-colors">
                   Home
                 </Link>
@@ -164,7 +188,7 @@ const Footer: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-4">
+              <div className="flex flex-wrap text-center gap-4 justify-center  text-sm text-gray-400 mb-4">
                 <Link
                   to="/privacy"
                   className="hover:text-[#c8ff00] transition-colors"
@@ -179,26 +203,23 @@ const Footer: React.FC = () => {
                 </Link>
               </div>
 
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-center  text-gray-400">
                 © 2025 PixelPlay. All rights reserved.
               </p>
             </div>
           </div>
-
-          {/* Right Column - Graphic */}
-          <div className="relative">
-            {/* Desktop artwork */}
-            <div className="lg:block hidden absolute right-0 top-0 w-full h-full">
-              <img src="/assets/footer_img.png" alt="Footer graphic" className="w-full h-auto" loading="lazy" />
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Background decorative elements - optional */}
       <div className="absolute right-0 bottom-0 w-1/2 h-full pointer-events-none opacity-10">
         <div className="absolute inset-0 bg-gradient-to-l from-[#c8ff00] to-transparent"></div>
       </div>
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </footer>
   );
 };

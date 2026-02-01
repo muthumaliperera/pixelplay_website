@@ -29,20 +29,22 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between px-8 py-6">
-      <img
-        src="/assets/pixlogo.png"
-        alt=""
-        className="h-6 w-auto object-contain"
-      />
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-black/60 backdrop-blur-3xl shadow-md">
+      <Link to="/" className="z-10">
+        <img
+          src="/assets/pixlogo_white.svg"
+          alt="PixelPlay Logo"
+          className="h-4 sm:h-6 w-auto object-contain"
+        />
+      </Link>
 
-      <div className="sm:flex items-center gap-8 bg-black rounded-full px-8 py-4 relative hidden">
-        <a
-          href="#home"
-          className="text-white hover:text-[#c8ff00] transition-colors"
+      <div className="sm:flex items-center gap-8 md:gap-16 lg:gap-24 bg-stone-800 hover:bg-zinc-800/90 transition-colors rounded-full px-8 py-3 relative hidden backdrop-blur-sm">
+        <button
+          onClick={() => navigate("/", { state: { scrollTo: "home" } })}
+          className="text-white  hover:text-[#c8ff00] transition-colors"
         >
           Home
-        </a>
+        </button>
 
         {/* Service Dropdown */}
         <div className="relative" ref={dropdownRef}>
@@ -91,21 +93,24 @@ const Navbar: React.FC = () => {
           )}
         </div>
 
-        <Link
-          to="/work"
+        <button
+          onClick={() => navigate("/", { state: { scrollTo: "creativity" } })}
           className="text-white hover:text-[#c8ff00] transition-colors"
         >
           Work
-        </Link>
-        <a
-          href="#about"
+        </button>
+        <button
+          onClick={() => navigate("/", { state: { scrollTo: "who-we-are" } })}
           className="text-white hover:text-[#c8ff00] transition-colors"
         >
           About
-        </a>
+        </button>
       </div>
 
-      <button className="bg-black text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-colors">
+      <button
+        onClick={() => navigate("/", { state: { scrollTo: "footer" } })}
+        className="text-black bg-[#c8ff00] px-6 py-2 sm:px-8 sm:py-3 rounded-full hover:opacity-80 transition-colors"
+      >
         Contact
       </button>
     </nav>
