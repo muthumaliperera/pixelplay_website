@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { createPortal } from 'react-dom';
+import ContactModal from "./ContactModal";
 
 const Navbar: React.FC = () => {
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -41,7 +45,7 @@ const Navbar: React.FC = () => {
       <div className="sm:flex items-center gap-8 md:gap-16 lg:gap-24 bg-stone-800 hover:bg-zinc-800/90 transition-colors rounded-full px-8 py-3 relative hidden backdrop-blur-sm">
         <button
           onClick={() => navigate("/", { state: { scrollTo: "home" } })}
-          className="text-white  hover:text-[#c8ff00] transition-colors"
+          className="text-white hover:text-[#c8ff00] transition-colors"
         >
           Home
         </button>
@@ -108,11 +112,20 @@ const Navbar: React.FC = () => {
       </div>
 
       <button
-        onClick={() => navigate("/", { state: { scrollTo: "footer" } })}
+        onClick={() => setIsContactModalOpen(true)}
         className="text-black bg-[#c8ff00] px-6 py-2 sm:px-8 sm:py-3 rounded-full hover:opacity-80 transition-colors"
       >
         Contact
       </button>
+
+      {isContactModalOpen &&
+        createPortal(
+          <ContactModal
+            isOpen={isContactModalOpen}
+            onClose={() => setIsContactModalOpen(false)}
+          />,
+          document.body
+        )}
     </nav>
   );
 };

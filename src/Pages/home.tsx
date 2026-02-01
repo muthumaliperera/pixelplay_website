@@ -978,7 +978,13 @@ const Home: React.FC = () => {
                   }}
                   key={`work-card-${project.id}`}
                   data-creative-card
-                  className="min-w-[300px] sm:min-w-[480px] lg:min-w-[560px] bg-white/10 rounded-3xl"
+                  className="min-w-[300px] sm:min-w-[480px] lg:min-w-[560px] bg-white/10 rounded-3xl cursor-pointer"
+                  onClick={(e) => {
+                    // Only trigger if the click is not on the button or its children
+                    if (!(e.target as HTMLElement).closest('button')) {
+                      openModal(project);
+                    }
+                  }}
                 >
                   {/* Media 16:9 */}
                   <div className="relative rounded-3xl overflow-hidden ">
@@ -1011,7 +1017,10 @@ const Home: React.FC = () => {
                   {/* Actions row */}
                   <div className="flex justify-start px-4 pb-4 mt-3">
                     <button
-                      onClick={() => openModal(project)}
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent event bubbling to the card
+                        openModal(project);
+                      }}
                       className="border border-white text-white/90 rounded-full px-6 py-3 hover:bg-[#B3E234] hover:text-black hover:border-none transition-colors flex items-center gap-2"
                     >
                       {project.category === "uiux"
@@ -1139,16 +1148,22 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Project Modal */}
-      {modalProject && (
+      {/* Modals */}
+      {modalProject && !isContactModalOpen && (
         <ProjectModal project={modalProject} onClose={closeModal} />
       )}
-
-      {/* Contact Modal */}
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-      />
+      {isContactModalOpen && (
+        <ContactModal
+          isOpen={isContactModalOpen}
+          onClose={() => {
+            setIsContactModalOpen(false);
+            // Reset modal project state when contact modal is closed
+            if (modalProject) {
+              setModalProject(null);
+            }
+          }}
+        />
+      )}
 
       {/* Footer */}
       <Footer />
