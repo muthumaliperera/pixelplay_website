@@ -8,6 +8,7 @@ import Footer from "../Components/footer";
 import ImageSlider from "../Components/ImageSlider";
 import Navbar from "../Components/navbar";
 import ProjectModal from "../Components/ProjectModal";
+import RotatingTagline from "../Components/RotatingTagline";
 import { projects as allProjects, Project } from "../data/projects";
 
 const heroContainer: Variants = {
@@ -253,10 +254,10 @@ const Home: React.FC = () => {
         id="home"
         className="relative min-h-screen bg-[#141414] overflow-hidden"
         style={{
-          backgroundImage: "url('/assets/hero_bg.png')",
+          backgroundImage: "url('/assets/grid.svg')",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: "contain",
+          backgroundPosition: "top",
         }}
       >
         <Navbar />
@@ -273,12 +274,7 @@ const Home: React.FC = () => {
                 variants={heroItem}
                 className="flex justify-center mb-6"
               >
-                <img
-                  src="/assets/fig_expert.svg"
-                  alt="Hero Visuals"
-                  className="w-32"
-                  loading="lazy"
-                />
+                <RotatingTagline />
               </motion.div>
 
               <motion.h1
@@ -869,7 +865,7 @@ const Home: React.FC = () => {
 
       {/* Creativity In Action Section */}
       <section id="creativity" className="bg-[#1e1e1e] py-20">
-        <div className="container mx-auto px-6 sm:px-8">
+        <div className=" mx-auto px-6 sm:px-8">
           <motion.div
             variants={sectionFadeUp}
             initial="hidden"
@@ -981,7 +977,7 @@ const Home: React.FC = () => {
                   className="min-w-[300px] sm:min-w-[480px] lg:min-w-[560px] bg-white/10 rounded-3xl cursor-pointer"
                   onClick={(e) => {
                     // Only trigger if the click is not on the button or its children
-                    if (!(e.target as HTMLElement).closest('button')) {
+                    if (!(e.target as HTMLElement).closest("button")) {
                       openModal(project);
                     }
                   }}
@@ -1059,7 +1055,7 @@ const Home: React.FC = () => {
           backgroundRepeat: "no-repeat",
           backgroundSize: "auto",
           backgroundPosition: "top",
-          position: 'relative',
+          position: "relative",
           zIndex: 10,
         }}
       >
@@ -1084,20 +1080,23 @@ const Home: React.FC = () => {
                 effortlessly.
               </p>
 
-              <p className=" text-lg sm:xl text-gray-800 ">
+              <p className=" text-lg sm:xl text-gray-800 mb-8">
                 Every project starts with understanding, not assumptions. We
                 design around your users, your goals, and real constraints —
-                because effective design isn’t about trends, it’s about results.
+                because effective design isn't about trends, it's about results.
               </p>
             </div>
-            <div className="w-full flex justify-center">
+            <div
+              className="w-full flex justify-center gap-4 items-center mt-6"
+              style={{ position: "relative", zIndex: 20 }}
+            >
               <button
                 onClick={() => {
-                  console.log('Button clicked');
+                  console.log("Button clicked");
                   setIsContactModalOpen(true);
                 }}
-                className="relative z-20 flex items-center gap-2 font-medium text-black bg-[#B3E234] mt-6 px-6 py-4 rounded-full hover:bg-[#C4EB5A] transition-colors"
-                style={{ position: 'relative', zIndex: 20 }}
+                className="relative z-20 flex items-center gap-2 font-medium text-black bg-[#B3E234]  px-6 py-4 rounded-full hover:bg-[#C4EB5A] transition-colors"
+                style={{ position: "relative", zIndex: 20 }}
               >
                 Start a Conversation
                 <svg
@@ -1114,6 +1113,14 @@ const Home: React.FC = () => {
                   />
                 </svg>
               </button>
+              <div className="">
+                <a
+                  href="/about"
+                  className="inline-flex items-center px-6 py-4 border border-black text-base font-medium rounded-full text-black bg-white hover:bg-black hover:text-white transition-colors duration-200"
+                >
+                  Read More
+                </a>
+              </div>
             </div>
           </motion.div>
 

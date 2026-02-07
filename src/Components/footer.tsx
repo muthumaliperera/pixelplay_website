@@ -23,12 +23,12 @@ const Footer: React.FC = () => {
   return (
     <footer
       id="footer"
-      className="relative bg-[#292929] text-white overflow-hidden pb-6"
+      className="relative bg-[#141414] text-white overflow-hidden pb-6"
       style={{
-        backgroundImage: "url('/assets/hero_bg.png')",
+        backgroundImage: "url('/assets/grid.svg')",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundSize: "contain",
+        backgroundPosition: "top",
       }}
     >
       <div className="">
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
               </a>
 
               <a
-                href="mailto:pixelplay99@gmail.com"
+                href=""
                 className="flex items-center gap-2 hover:text-[#c8ff00] transition-colors"
               >
                 <svg
@@ -99,11 +99,11 @@ const Footer: React.FC = () => {
                 >
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
-                <span>pixelplay99@gmail.com</span>
+                <span>pixelplaydesignslab1@gmail.com</span>
               </a>
 
               <a
-                href="https://facebook.com"
+                href="https://web.facebook.com/profile.php?id=61587822440854"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#c8ff00] transition-colors"
@@ -116,9 +116,21 @@ const Footer: React.FC = () => {
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
+              <a
+                href="https://www.instagram.com/pixelplaydesignslab/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#c8ff00] transition-colors"
+              >
+                <img
+                  src="/assets/ri_instagram-fill_white.png"
+                  alt="Instagram"
+                  className=" w-6 "
+                />
+              </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/company/pixelplay-design-labs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#c8ff00] transition-colors"
@@ -135,7 +147,7 @@ const Footer: React.FC = () => {
 
             {/* CTA Button */}
             <div className="pb-6 w-full flex justify-center  px-12">
-              <button 
+              <button
                 onClick={() => setIsContactModalOpen(true)}
                 className="flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-black transition-colors"
               >
@@ -204,7 +216,8 @@ const Footer: React.FC = () => {
               </div>
 
               <p className="text-sm text-center  text-gray-400">
-                © 2025 PixelPlay. All rights reserved.
+                © 2025 PixelPlay. All rights reserved. Designed & Developed by
+                PixelPlay
               </p>
             </div>
           </div>
@@ -216,9 +229,9 @@ const Footer: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-l from-[#c8ff00] to-transparent"></div>
       </div>
       {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </footer>
   );

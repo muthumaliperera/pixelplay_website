@@ -14,39 +14,43 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  //car app
+
   {
     id: "carcare",
     title: "Car Care App",
     description:
   "“CarCare” - Your Vehicle's Personal Assistant. A simple mobile app that keeps your car healthy and you stress-free. It tracks your vehicle's health, reminds you of upcoming maintenance, instantly decodes warning lights, and stores all your car documents in one place.",
 
-    details: "15 screens · Interactive prototype · Design system",
-    image: "/assets/CarCare_Cover.png",
+    details: "4 screens · Interactive prototype · Design system",
+    image: "/assets/UI_Projects/Car_Care/CarCare_Cover.png",
     category: "uiux",
     featured: true,
     images: [
   {caption: "UI/UX walk through",
-    src: "/assets/Case Study Template_ PixelPlay.png",
+    src: "/assets/UI_Projects/Car_Care/Case Study Template_ PixelPlay.png",
     
   }
   
 ],
   },
+  //Auren Graphic Design
   {
     id: "fashion_brand",
     title: "Auren Fashion",
     description:
       "Modern • Minimal • Timeless ",
     details: "Logo suite · Guidelines · Collateral",
-    image: "/assets/Auren_p1.png",
+    image: "/assets/Graphic/Auren/Auren_p1.png",
     category: "graphic",
     featured: true,
     images: [
-      { src: "/assets/Auren_p1.png" },
-      { src: "/assets/Auren_p2.png" },
+      { src: "/assets/Graphic/Auren/Auren_p1.png" },
+      { src: "/assets/Graphic/Auren/Auren_p2.png" },
       
     ],
   },
+  //UrbanEat Pitch Deck
   {
     id: "pitch-deck",
     title: "UrbanEat Pitch Deck",
@@ -67,17 +71,23 @@ export const projects: Project[] = [
       { src: "/assets/Ppt_Sample Designs/p1/Slide8.png", caption: "Slide8" },   
     ],
   },
-  
+  //Elvyn Denims UIUX Design
   {
     id: "website",
     title: "Elvyn Denims",
-    description: "sample",
-    details: "15 screens · Interactive prototype · Design system",
-    image: "/assets/ELVYN.gif",
+    description: "ELVYN represents the evolution of modern denim—blending timeless silhouettes with innovative sustainable practices. Our design language balances minimalist sophistication with versatile functionality, creating pieces that seamlessly transition from casual to refined.",
+    details: "1 Screen · Interactive prototype · Design system",
+    image: "/assets/UI_Projects/Elvyn/ELVYN.gif",
     category: "uiux",
     featured: true,
-    images: [{ src: "/assets/Elvyn_ui.png" }],
+    images: [
+      { src: "/assets/UI_Projects/Elvyn/DesignSystem.png", caption :"Elvyn Denims Design System" },
+      { src: "/assets/UI_Projects/Elvyn/Elvyn_ui.png", caption :"Elvyn Denims UI Design" },
+      
+
+    ],
   },
+  //Q1 2026 Marketing Strategy Pitch Deck
   {
     id: "pitch-deck2",
     title: "Q1 2026 Marketing Strategy",
@@ -98,6 +108,7 @@ export const projects: Project[] = [
       { src: "/assets/Ppt_Sample Designs/p2/Slide8.png", caption: "Slide8" },   
     ],
   },
+  //Ceylon Spice Exports Presentation Design
   {
     id: "company_profile",
     title: "Ceylon Spice Exports (Pvt) Ltd",
@@ -125,13 +136,14 @@ export const projects: Project[] = [
     ],
   
   },
+  //Auto Track Dashboard UIUX Design
   {
     id: "auto_track",
     title: "AutoTrack Dashboard",
     description:
   "A clean, responsive dashboard enabling small vehicle service businesses to manage vehicles, track payments, and understand daily operations quickly, easily.",
 
-    details: "15 screens · Interactive prototype · Design system",
+    details: "3 screens · Interactive prototype · Design system",
     image: "/assets/UI_Projects/Auto_Track/cover.png",
     category: "uiux",
     featured: true,

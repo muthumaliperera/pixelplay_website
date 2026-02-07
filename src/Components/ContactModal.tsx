@@ -60,15 +60,15 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
         <motion.div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-xl px-4"
           style={{
-            position: 'fixed',
+            position: "fixed",
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '1rem',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1rem",
             zIndex: 60,
           }}
           initial={{ opacity: 0 }}
@@ -77,11 +77,16 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
           onClick={onClose}
         >
           <motion.div
-            className="w-full max-w-md bg-gray-900 text-white rounded-2xl p-8 relative mx-auto my-8"
+            className="w-full max-w-2xl bg-black/80 text-white rounded-2xl  relative mx-auto my-8"
             style={{
-              maxHeight: 'calc(100vh - 4rem)',
-              overflowY: 'auto',
-              WebkitOverflowScrolling: 'touch',
+              maxHeight: "calc(100vh - 4rem)",
+              overflowY: "auto",
+              WebkitOverflowScrolling: "touch",
+
+              backgroundImage: "url('/assets/modal_bg.png')",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -99,84 +104,99 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             </button>
 
             {/* Header */}
-            <h2 className="text-2xl font-bold mb-2">
-              Let’s talk about your project
-            </h2>
-            <p className="text-gray-400 mb-6">
-              Tell us what you’re looking for — we’ll get back quickly.
-            </p>
+            <div className="flex justify-center items-center gap-5 border-b-2 pb-8 border-white/30">
+              <p className="text-4xl font-thin">
+                Hi there! <br></br>What are you looking to create today?
+              </p>
+              <p className="text-gray-400 mt-8 text-right">
+                Tell us a bit about what you're looking for. We'll take it from
+                there.
+              </p>
+            </div>
+            <div className="p-8">
+              <div
+                className="bg-[#191919] p-6 rounded-2xl overflow-clip"
+                style={{
+                  borderTop: "2px solid ",
+                  borderImage:
+                    "linear-gradient(90deg,rgba(179, 226, 52, 0) 24%, rgba(179, 226, 52, 1) 49%, rgba(179, 226, 52, 0) 77%) 1",
+                }}
+              >
+                {/* Success */}
+                {isSuccess ? (
+                  <div className="text-center py-10">
+                    <p className="text-lg font-semibold">🎉 Message sent!</p>
+                    <p className="text-gray-400 mt-2">
+                      We’ll contact you shortly.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Your name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-transparent border-2 border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
 
-            {/* Success */}
-            {isSuccess ? (
-              <div className="text-center py-10">
-                <p className="text-lg font-semibold">🎉 Message sent!</p>
-                <p className="text-gray-400 mt-2">We’ll contact you shortly.</p>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email address"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-transparent border-2 border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
+
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone number"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-transparent border-2 border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
+
+                    <select
+                      name="service"
+                      required
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-[#191919] border-2 border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    >
+                      <option value="">What do you need?</option>
+                      <option value="uiux">UI / UX Design</option>
+                      <option value="web">Web Development</option>
+                      <option value="mobile">Mobile App</option>
+                      <option value="branding">Branding</option>
+                      <option value="other">Other</option>
+                    </select>
+
+                    <textarea
+                      name="message"
+                      placeholder="Tell us more about your idea"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-transparent border-2 border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full text-black bg-[#B3E234] hover:opacity-80 disabled:opacity-50 py-4 rounded-xl font-medium transition"
+                    >
+                      {isSubmitting ? "Sending..." : "Send request"}
+                    </button>
+                  </form>
+                )}
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email address"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone number"
-                  required
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-
-                <select
-                  name="service"
-                  required
-                  value={formData.service}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                >
-                  <option value="">What do you need?</option>
-                  <option value="uiux">UI / UX Design</option>
-                  <option value="web">Web Development</option>
-                  <option value="mobile">Mobile App</option>
-                  <option value="branding">Branding</option>
-                  <option value="other">Other</option>
-                </select>
-
-                <textarea
-                  name="message"
-                  placeholder="Tell us more about your idea"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 py-2 rounded font-medium transition"
-                >
-                  {isSubmitting ? "Sending..." : "Send request"}
-                </button>
-              </form>
-            )}
+            </div>
           </motion.div>
         </motion.div>
       )}
