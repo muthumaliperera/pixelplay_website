@@ -88,10 +88,7 @@ const Footer: React.FC = () => {
                 <span>+94 123 456 7890</span>
               </a>
 
-              <a
-                href=""
-                className="flex items-center gap-2 hover:text-[#c8ff00] transition-colors"
-              >
+              <div className="flex items-center gap-2  hover:text-[#c8ff00] transition-colors">
                 <svg
                   className="w-6 h-6"
                   fill="currentColor"
@@ -100,7 +97,7 @@ const Footer: React.FC = () => {
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
                 <span>pixelplaydesignslab1@gmail.com</span>
-              </a>
+              </div>
 
               <a
                 href="https://web.facebook.com/profile.php?id=61587822440854"
