@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ContactModal from "./ContactModal";
 
 const Navbar: React.FC = () => {
   const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState<string>("home");
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
   const navigate = useNavigate();
 
   // Close dropdown when clicking outside
@@ -24,6 +26,52 @@ const Navbar: React.FC = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Update active link based on current route
+  useEffect(() => {
+    const path = location.pathname;
+    
+    if (path === "/") {
+      setActiveLink("home");
+    } else if (path === "/services" || path === "/work") {
+      setActiveLink("services");
+    } else if (path === "/about") {
+      setActiveLink("about");
+    } else if (path === "/careers") {
+      setActiveLink("careers");
+    }
+  }, [location]);
+
+  // Track scroll position for home page sections
+  useEffect(() => {
+    if (location.pathname === "/") {
+      const handleScroll = () => {
+        const sections = ["home", "creativity", "who-we-are"];
+        const scrollPosition = window.scrollY + 100;
+
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              if (section === "creativity") {
+                setActiveLink("work");
+              } else if (section === "who-we-are") {
+                setActiveLink("about");
+              } else {
+                setActiveLink(section);
+              }
+              break;
+            }
+          }
+        }
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      handleScroll(); // Check initial position
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [location]);
 
   const handleServiceClick = (
     category: "uiux" | "graphic" | "presentation",
@@ -45,7 +93,11 @@ const Navbar: React.FC = () => {
       <div className="sm:flex items-center gap-8 md:gap-16 lg:gap-24 bg-stone-800 hover:bg-zinc-800/90 transition-colors rounded-full px-8 py-3 relative hidden backdrop-blur-sm">
         <button
           onClick={() => navigate("/", { state: { scrollTo: "home" } })}
-          className="text-white hover:text-[#c8ff00] transition-colors"
+          className={`transition-colors ${
+            activeLink === "home" 
+              ? "text-[#c8ff00]" 
+              : "text-white hover:text-[#c8ff00]"
+          }`}
         >
           Home
         </button>
@@ -54,7 +106,11 @@ const Navbar: React.FC = () => {
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
-            className="flex items-center gap-1 text-white hover:text-[#c8ff00] transition-colors"
+            className={`flex items-center gap-1 transition-colors ${
+              activeLink === "services" 
+                ? "text-[#c8ff00]" 
+                : "text-white hover:text-[#c8ff00]"
+            }`}
           >
             Service
             <svg
@@ -99,22 +155,34 @@ const Navbar: React.FC = () => {
 
         <button
           onClick={() => navigate("/", { state: { scrollTo: "creativity" } })}
-          className="text-white hover:text-[#c8ff00] transition-colors"
+          className={`transition-colors ${
+            activeLink === "work" 
+              ? "text-[#c8ff00]" 
+              : "text-white hover:text-[#c8ff00]"
+          }`}
         >
           Work
         </button>
         <button
           onClick={() => navigate("/", { state: { scrollTo: "who-we-are" } })}
-          className="text-white hover:text-[#c8ff00] transition-colors"
+          className={`transition-colors ${
+            activeLink === "about" 
+              ? "text-[#c8ff00]" 
+              : "text-white hover:text-[#c8ff00]"
+          }`}
         >
           About
         </button>
-        <button
-          onClick={() => navigate("/", { state: { scrollTo: "" } })}
-          className="text-white hover:text-[#c8ff00] transition-colors"
+        <Link
+          to="/careers"
+          className={`transition-colors ${
+            activeLink === "careers" 
+              ? "text-[#c8ff00]" 
+              : "text-white hover:text-[#c8ff00]"
+          }`}
         >
           Careers
-        </button>
+        </Link>
       </div>
 
       <button
