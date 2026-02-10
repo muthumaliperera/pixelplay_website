@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { createPortal } from 'react-dom';
 import ContactModal from "./ContactModal";
 
 const Navbar: React.FC = () => {
@@ -109,6 +109,12 @@ const Navbar: React.FC = () => {
         >
           About
         </button>
+        <button
+          onClick={() => navigate("/", { state: { scrollTo: "" } })}
+          className="text-white hover:text-[#c8ff00] transition-colors"
+        >
+          Careers
+        </button>
       </div>
 
       <button
@@ -124,7 +130,7 @@ const Navbar: React.FC = () => {
             isOpen={isContactModalOpen}
             onClose={() => setIsContactModalOpen(false)}
           />,
-          document.body
+          document.body,
         )}
     </nav>
   );

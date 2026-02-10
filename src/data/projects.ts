@@ -152,4 +152,23 @@ export const projects: Project[] = [
     src: "/assets/UI_Projects/Auto_Track/Case Study Template_ PixelPlay_AutoTrack.png",}
   ]
   },
+  //Bubbly Crumbs Design
+  {
+    id: "bubbly_crumbs",
+    title: "Bubbly Crumbs tea & Pastry",
+    description:
+      "Where bubble tea meets freshly baked happiness.",
+    details: "Logo suite · Guidelines · Collateral",
+    image: "/assets/Graphic/BubblyCrumbs/Post 1 temp.png",
+    category: "graphic",
+    featured: true,
+    images: [
+      { src: "/assets/Graphic/BubblyCrumbs/Post 1 temp.png" },
+      { src: "/assets/Graphic/BubblyCrumbs/post2.png" },
+      { src: "/assets/Graphic/BubblyCrumbs/Post 3.png" },
+      { src: "/assets/Graphic/BubblyCrumbs/post 4.png" },
+      
+      
+    ],
+  },
 ];
