@@ -168,32 +168,41 @@ const Footer: React.FC = () => {
             {/* Footer Links */}
             <div className="pt-8 border-t w-full border-gray-600 px-12">
               <div className="flex flex-wrap gap-6 mb-4 w-full justify-center ">
-                <Link to="/" className="hover:text-[#c8ff00] transition-colors">
+                <a
+                  href="#home"
+                  className="hover:text-[#c8ff00] transition-colors"
+                >
                   Home
-                </Link>
-                <Link
-                  to="/services"
+                </a>
+                <a
+                  href="#what-we-create"
                   className="hover:text-[#c8ff00] transition-colors"
                 >
                   Services
-                </Link>
-                <Link
-                  to="/work"
+                </a>
+                <a
+                  href="#creativity"
                   className="hover:text-[#c8ff00] transition-colors"
                 >
                   Work
-                </Link>
+                </a>
                 <Link
                   to="/about"
                   className="hover:text-[#c8ff00] transition-colors"
                 >
                   About
                 </Link>
-                <Link
-                  to="/contact"
-                  className="hover:text-[#c8ff00] transition-colors"
+                <button
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="hover:text-[#c8ff00] transition-colors bg-transparent border-none cursor-pointer"
                 >
                   Contact
+                </button>
+                <Link
+                  to="/careers"
+                  className="hover:text-[#c8ff00] transition-colors"
+                >
+                  Careers
                 </Link>
               </div>
 

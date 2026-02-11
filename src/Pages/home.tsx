@@ -334,6 +334,7 @@ const Home: React.FC = () => {
 
       {/* What We Create Section */}
       <motion.section
+        id="what-we-create"
         ref={whatWeCreateRef}
         className="bg-white pt-28 pb-20 w-full"
         initial="hidden"
@@ -379,7 +380,7 @@ const Home: React.FC = () => {
               />
               <motion.div
                 variants={cardsContainer}
-                className="flex justify-start lg:justify-center gap-6 w-max py-5"
+                className="flex justify-start flex-col sm:flex-row lg:justify-center gap-6 w-max py-5"
               >
                 {/* Card 1: UI/UX Design */}
                 <motion.div
@@ -490,16 +491,16 @@ const Home: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex justify-between mt-0 w-full">
+                    <div className="flex flex-col gap-3 sm:flex-row justify-between mt-0 w-full">
                       <Link to="/services?tab=uiux">
-                        <button className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">
+                        <button className="bg-black w-full sm:w-fit text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">
                           Explore UI/UX Projects
                         </button>
                       </Link>
 
                       <button
                         onClick={() => toggleCard(1)}
-                        className="border-2 border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-colors flex items-center gap-2"
+                        className="border-2 border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-colors flex justify-center items-center gap-2"
                       >
                         {expandedCard === 1 ? (
                           <>
@@ -650,16 +651,16 @@ const Home: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex justify-between mt-0 w-full">
+                    <div className="flex flex-col sm:flex-row gap-3 justify-between mt-0 w-full">
                       <Link to="/services?tab=graphic">
-                        <button className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">
+                        <button className="bg-black w-full sm:w-fit text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">
                           See Our Design Work
                         </button>
                       </Link>
 
                       <button
                         onClick={() => toggleCard(2)}
-                        className="border-2 border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-colors flex items-center gap-2"
+                        className="border-2 border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-colors justify-center flex items-center gap-2"
                       >
                         {expandedCard === 2 ? (
                           <>
@@ -704,7 +705,7 @@ const Home: React.FC = () => {
                 {/* Card 3: Presentation Design */}
                 <motion.div
                   variants={cardItem}
-                  className="flex-shrink-0 snap-start overflow-visible"
+                  className="flex-shrink-0  snap-start overflow-visible"
                 >
                   <motion.div
                     whileHover={{ y: -8 }}
@@ -807,16 +808,16 @@ const Home: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex justify-between mt-0 w-full">
+                    <div className="flex justify-between flex-col gap-3 sm:flex-row mt-0 w-full">
                       <Link to="/services?tab=presentation">
-                        <button className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">
+                        <button className="bg-black text-white w-full sm:w-fit px-6 py-3 rounded-full hover:bg-gray-800 transition-colors">
                           See Our Presentations
                         </button>
                       </Link>
 
                       <button
                         onClick={() => toggleCard(3)}
-                        className="border-2 border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-colors flex items-center gap-2"
+                        className="border-2 border-black text-black px-6 py-3 rounded-full hover:bg-black hover:text-white transition-colors flex justify-center items-center gap-2"
                       >
                         {expandedCard === 3 ? (
                           <>
