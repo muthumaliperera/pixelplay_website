@@ -171,4 +171,37 @@ export const projects: Project[] = [
       
     ],
   },
+  //Trust Pay Graphic Design
+  {
+    id: "trust_pay",
+    title: "Trust Pay Graphic Design",
+    description:
+      "TrustPay Solutions is a cutting-edge fintech company revolutionizing how people manage their money in Sri Lanka and across South Asia.",
+    image: "/assets/Graphic/TrustPay/Flyer.png",
+    category: "graphic",
+    featured: true,
+    images: [
+      { src: "/assets/Graphic/TrustPay/Logo1.png" , caption: "Logo Design"},
+      { src: "/assets/Graphic/TrustPay/Logo2.png" , caption: "Meaningful Logo Design"},
+{ src: "/assets/Graphic/TrustPay/LogoMockups.png" , caption: "Logo Mockup"},
+
+{ src: "/assets/Graphic/TrustPay/Card.png" , caption: "Business Card - Double Side"},
+            { src: "/assets/Graphic/TrustPay/Brochure.png", caption: "Brochure Design - 4 pages" },
+
+
+      { src: "/assets/Graphic/TrustPay/Post 1.png" , caption: "Post 1: App Launch Announcement"},
+      { src: "/assets/Graphic/TrustPay/post 2.png", caption:"Post 2: Bill Payment Feature" },
+
+      { src: "/assets/Graphic/TrustPay/Post 3.png", caption: "Post 3: Money Transfer Feature" },
+       
+      { src: "/assets/Graphic/TrustPay/post 4.png", caption: "Post 4: Merchant Payment Solution" },
+     
+      { src: "/assets/Graphic/TrustPay/post 5.png", caption: "Post 5: Referral Bonus Program" },
+     
+      { src: "/assets/Graphic/TrustPay/Flyer.png", caption: "Flyer Design" },
+
+      
+      
+    ],
+  },
 ];

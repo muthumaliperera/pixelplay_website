@@ -68,17 +68,30 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           <div className="w-full px-12 py-8">
             {project.category === "graphic" ? (
               /* GRAPHIC GRID */
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              /* GRAPHIC GRID - Pinterest masonry */
+              <div
+                style={{
+                  columns: "3",
+                  columnGap: "20px",
+                }}
+              >
                 {images.map((img, i) => (
-                  <div key={i} className="space-y-3">
+                  <div
+                    key={i}
+                    style={{
+                      breakInside: "avoid",
+                      marginBottom: "20px",
+                    }}
+                  >
                     <img
                       src={img.src}
                       alt={img.caption || `${project.title} ${i + 1}`}
                       className="w-full h-auto rounded-xl shadow-sm"
                     />
-
                     {img.caption && (
-                      <p className="text-xl text-gray-600">{img.caption}</p>
+                      <p className="text-xl text-gray-600 mt-2">
+                        {img.caption}
+                      </p>
                     )}
                   </div>
                 ))}
